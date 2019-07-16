@@ -1,10 +1,9 @@
 module Enumerable
-  def my_each(arr)
+  def my_each_with_index(arr)
     #code here
     n = arr.length
     for i in 0...n
-      element = arr[i]
-      yield(element)
+      yield(i)
     end
     
   end
@@ -17,7 +16,7 @@ class MyMethods
 end
 
 each = MyMethods.new
-each.my_each([2, 3, 4]) { |param| puts "my each element #{param}"}
+each.my_each_with_index([2, 3, 4]) { |index| puts "my index #{index}"}
 
 
-[2, 3, 4].each { |param| puts "element #{param}" }
+[2, 3, 4].each_index { |index| puts "i #{index}" }
