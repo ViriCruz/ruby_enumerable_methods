@@ -9,13 +9,22 @@ module Enumerable
     
   end
 
-  def my_none?
-    value = true
-    self.my_each { |element|  return false if yield(element) == true }
-    value
+  def my_count(elem = nil)
+    count = 0
+    self.my_each do |element|
+      
+      if elem
+        count += 1 if elem == element
+      else
+        count += 1
+      end
+      
+    end
+    count
   end
 end
 
 include Enumerable
-print %w{ant bear cat}.my_none? { |word| word.length == 3 } #=> false
-print %w{ant bear cat}.none? { |word| word.length == 3 } #=> false
+ary = ["a", "b", "c", "a"]
+print ary.count("a")               #=> 4
+print ary.my_count("a")
