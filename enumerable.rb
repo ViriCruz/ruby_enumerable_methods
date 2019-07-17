@@ -1,23 +1,29 @@
 module Enumerable
-  def my_each(arr)
+  def my_each
     #code here
-    n = arr.length
+    n = self.length
     for i in 0...n
-      element = arr[i]
+      element = self[i]
       yield(element)
     end
     
   end
+
+  def my_select
+    arr = []
+    self.my_each { |element| arr << element if yield(element) == true }
+    arr
+  end
 end
 
-class MyMethods
-  include Enumerable
+# class MyMethods
+#   include Enumerable
   
-  def initialize; end
-end
+#   def initialize; end
+# end
 
-each = MyMethods.new
-each.my_each([2, 3, 4]) { |param| puts "my each element #{param}"}
+#print (1..10).my_select { |param| param % 3 == 0 } broke
+#print [2, 3, 4].my_select { |param| param % 3 == 0 } works
+print (1..10).find_all { |i|  i % 3 == 0 }   #=> [3, 6, 9]
 
-
-[2, 3, 4].each { |param| puts "element #{param}" }
+print (1..10).select { |param| param % 3 == 0 }
