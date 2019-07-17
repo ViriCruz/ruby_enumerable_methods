@@ -1,22 +1,41 @@
 module Enumerable
-  def my_each_with_index(arr)
+
+  def my_each
     #code here
-    n = arr.length
+    n = self.length
     for i in 0...n
-      yield(i)
+      element = self[i]
+      yield(element)
     end
     
   end
+
+  def my_each_with_index
+    #code here
+    
+    arr = []
+    index = 0
+    self.my_each do |element| 
+      arr << element
+      yield(element, index) 
+      index += 1 
+    end 
+    arr
+  end
 end
 
-class MyMethods
-  include Enumerable
+# class MyMethods
+#   include Enumerable
   
-  def initialize; end
-end
+#   def initialize; end
+# end
 
-each = MyMethods.new
-each.my_each_with_index([2, 3, 4]) { |index| puts "my index #{index}"}
+# each = MyMethods.new
+#each.my_each_with_index([2, 3, 4]) { |index| puts "my index #{index}"}
+hash = {}
+# print %w(cat dog wombat).each_with_index { |item, index|
+#   hash[item] = index
+# }
+print %w(cat dog wombat).my_each_with_index { |item, index| hash[item] = index }
 
-
-[2, 3, 4].each_index { |index| puts "i #{index}" }
+print hash
