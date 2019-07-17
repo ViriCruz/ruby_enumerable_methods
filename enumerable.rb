@@ -9,21 +9,13 @@ module Enumerable
     
   end
 
-  def my_select
-    arr = []
-    self.my_each { |element| arr << element if yield(element) == true }
-    arr
+  def my_any?
+    value = false
+    self.my_each { |element|  return true if yield(element) == true }
+    value
   end
 end
 
-# class MyMethods
-#   include Enumerable
-  
-#   def initialize; end
-# end
-
-#print (1..10).my_select { |param| param % 3 == 0 } broke
-#print [2, 3, 4].my_select { |param| param % 3 == 0 } works
-print (1..10).find_all { |i|  i % 3 == 0 }   #=> [3, 6, 9]
-
-print (1..10).select { |param| param % 3 == 0 }
+include Enumerable
+print %w[ant bear cat].my_any? { |word| word.length >= 4 } #=> true
+print %w[ant bear cat].any? { |word| word.length >= 4 } #=> true
