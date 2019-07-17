@@ -9,22 +9,14 @@ module Enumerable
     
   end
 
-  def my_count(elem = nil)
-    count = 0
-    self.my_each do |element|
-      
-      if elem
-        count += 1 if elem == element
-      else
-        count += 1
-      end
-      
-    end
-    count
+  def my_map
+    arr = []
+    self.to_a.my_each { |element| arr << yield(element) }
+    arr
   end
 end
 
 include Enumerable
-ary = ["a", "b", "c", "a"]
-print ary.count("a")               #=> 4
-print ary.my_count("a")
+
+print (1..4).map { |i| i*i }      #=> [1, 4, 9, 16]
+print (1..4).my_map { |i| i*i }      #=> [1, 4, 9, 16]
