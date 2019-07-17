@@ -1,21 +1,13 @@
 module Enumerable
-  def my_each
-    #code here
-    n = self.length
-    for i in 0...n
-      element = self[i]
-      yield(element)
-    end
-    
-  end
+ 
 
   def my_inject
     arr = self.to_a
-    arr.pop
     sum = arr[0]
-    arr.my_each do |element| 
-      sum = yield(sum, element + 1)
+    for i in 0...(arr.length - 1)
+      sum = yield(sum, arr[i + 1])
     end
+   
     sum
   end
 end
@@ -27,6 +19,9 @@ include Enumerable
 #   puts "sum #{sum} n #{n}" 
 #   sum + n
 # end            #=> 45
- 
+def multiply_els(arr)
+  arr.my_inject { |times, n| times * n }
+end 
 
 print (5..10).my_inject { |sum, n| sum + n }
+print multiply_els([2,4,5])
