@@ -9,13 +9,13 @@ module Enumerable
     
   end
 
-  def my_any?
-    value = false
-    self.my_each { |element|  return true if yield(element) == true }
+  def my_none?
+    value = true
+    self.my_each { |element|  return false if yield(element) == true }
     value
   end
 end
 
 include Enumerable
-print %w[ant bear cat].my_any? { |word| word.length >= 4 } #=> true
-print %w[ant bear cat].any? { |word| word.length >= 4 } #=> true
+print %w{ant bear cat}.my_none? { |word| word.length == 3 } #=> false
+print %w{ant bear cat}.none? { |word| word.length == 3 } #=> false
