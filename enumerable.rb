@@ -9,14 +9,24 @@ module Enumerable
     
   end
 
-  def my_map
-    arr = []
-    self.to_a.my_each { |element| arr << yield(element) }
-    arr
+  def my_inject
+    arr = self.to_a
+    arr.pop
+    sum = arr[0]
+    arr.my_each do |element| 
+      sum = yield(sum, element + 1)
+    end
+    sum
   end
 end
 
 include Enumerable
 
-print (1..4).map { |i| i*i }      #=> [1, 4, 9, 16]
-print (1..4).my_map { |i| i*i }      #=> [1, 4, 9, 16]
+#Same using a block and inject
+# (5..10).inject do |sum, n|  
+#   puts "sum #{sum} n #{n}" 
+#   sum + n
+# end            #=> 45
+ 
+
+print (5..10).my_inject { |sum, n| sum + n }
