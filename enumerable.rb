@@ -1,6 +1,5 @@
 module Enumerable
-  def my_each
-    #code here
+  def my_each  #1
     n = self.length
 
     for i in 0...n
@@ -10,23 +9,94 @@ module Enumerable
     
   end
 
-  def my_map(proc = nil)
+  def my_each_with_index #2
+    arr = []
+
+    index = 0
+
+    self.my_each do |element| 
+      arr << element
+
+      yield(element, index) 
+
+      index += 1 
+    end
+
+    arr
+  end
+
+  def my_select #3
+    arr = []
+
+    self.my_each { |element| arr << element if yield(element) == true }
+
+    arr
+  end
+
+  def my_all? #4
+    val = true
+
+    self.my_each { |element| return false if yield(element) == false }
+
+    val
+  end
+
+  def my_any? #5
+    value = false
+
+    self.my_each { |element|  return true if yield(element) == true }
+
+    value
+  end
+
+  def my_none? #6
+    value = true
+
+    self.my_each { |element|  return false if yield(element) == true }
+
+    value
+  end
+
+  def my_count(elem = nil) #7
+    count = 0
+
+    self.my_each do |element|
+      
+      if elem
+
+        count += 1 if elem == element
+
+      else
+
+        count += 1
+
+      end
+      
+    end
+
+    count
+  end
+
+  def my_map(proc = nil) #8
     arr = []
 
     proc ? self.to_a.my_each { |element| arr << proc.call(element) } : self.to_a.my_each { |element| arr << yield(element) }
     
     arr
   end
+
+  def my_inject #9
+    arr = self.to_a
+
+    sum = arr[0]
+
+    for i in 0...(arr.length - 1)
+
+      sum = yield(sum, arr[i + 1])
+
+    end
+   
+    sum
+  end
+  
 end
-
-include Enumerable
-
-proc = Proc.new {
-  |element|
-  element * element
-} 
-#a proc can be stored in a variable and can be passed as a normal argument
-
-print (1..4).my_map(proc)    #=> [1, 4, 9, 16]
-print (1..4).my_map { |e| e * e } #=> [1, 4, 9, 16]
-print (1..4).my_map(proc) { |e| e * e } #only execute the proc
