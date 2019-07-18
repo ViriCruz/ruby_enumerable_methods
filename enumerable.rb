@@ -28,5 +28,5 @@ proc = Proc.new {
 #a proc can be stored in a variable and can be passed as a normal argument
 
 print (1..4).my_map(proc)    #=> [1, 4, 9, 16]
-print (1..4).my_map { |e| e * e }
+print (1..4).my_map { |e| e * e } #=> [1, 4, 9, 16]
 print (1..4).my_map(proc) { |e| e * e } #only execute the proc
