@@ -1,7 +1,11 @@
 # Enumerable
-This project is based on the Enumerable module, which is developed in ruby language. It is a project proposed on the website the oding project as the second assignment of Ruby for Microverse Developers school.
+This project is based on the Enumerable module, which is developed in ruby language. With the goal to understand the behaviour of the module.
 
-# Authors:
-<ul>
-  <li> <a href="https://github.com/ViriCruz">Gabriela Cruz </a> </li>
-</ul>
+### Technologies used:
+* **ruby 2.6.3p62**
+
+### Author:
+* Gabriela Cruz [Github account](https://github.com/ViriCruz) [https://github.com/ViriCruz](https://github.com/ViriCruz)>
+
+### Live version
+**Live version** [here](https://repl.it/@ViriCruz/EnumerableModule)
