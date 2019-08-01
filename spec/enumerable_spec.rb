@@ -145,4 +145,16 @@ describe Enumerable do
       end
     end
   end
+
+  describe "#my_count" do
+    context 'when passing an array' do
+      it 'counts' do
+        expect(num_arr.my_count).to eql(4)
+      end
+
+      it 'counts an element' do
+        expect(num_arr.my_count(2)).to eql(1)
+      end
+    end
+  end
 end
