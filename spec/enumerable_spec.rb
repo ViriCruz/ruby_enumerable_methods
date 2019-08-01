@@ -112,6 +112,12 @@ describe Enumerable do
         expect(str_arr.my_all? { |s| s.length >= 1 }). to eql(true)
       end
     end
+
+    context 'when passing a single number' do
+      it 'raises' do
+        expect { 1.my_all? { |s| s.length >= 1 } }.to raise_error(NoMethodError)
+      end
+    end
   end
 
   describe "#my_any?" do
@@ -122,6 +128,20 @@ describe Enumerable do
 
       it 'returns false' do
         expect(num_arr.my_any?{ |x| x < 2 }).to eql(false)
+      end
+    end
+  end
+
+  describe "#my_none?" do
+    context 'when satisfies the condition' do
+      it 'returns false' do
+        expect(num_arr.my_none? { |e| e > 1 }).to eql(false)
+      end
+    end
+
+    context 'when the condition is not satisfied' do
+      it 'returns true' do
+        expect(num_arr.my_none? { |e| e < 1 }).to eql(true)
       end
     end
   end
