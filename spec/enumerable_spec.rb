@@ -99,4 +99,30 @@ describe Enumerable do
       end
     end
   end
+
+  describe "#my_all?" do
+    context 'when passing an integer array' do
+      it do
+        expect(num_arr.my_all? { |e| e > 6 }).to eql(false)
+      end
+    end
+
+    context 'when passing a string array' do
+      it do
+        expect(str_arr.my_all? { |s| s.length >= 1 }). to eql(true)
+      end
+    end
+  end
+
+  describe "#my_any?" do
+    context 'when passing an integer array' do
+      it 'returns true' do
+        expect(num_arr.my_any?{ |x| x > 2 }).to eql(true)
+      end
+
+      it 'returns false' do
+        expect(num_arr.my_any?{ |x| x < 2 }).to eql(false)
+      end
+    end
+  end
 end
