@@ -157,4 +157,21 @@ describe Enumerable do
       end
     end
   end
+
+  describe "#my_map" do
+    proc = Proc.new { |e| e * e }
+    context 'when a proc is passed as an argument' do
+      it 'returns an array of every element to the power of 2' do
+        expect(num_arr.my_map(proc)).to match_array([4, 9, 16, 25])
+      end
+
+    end
+
+    context 'when a block is passed' do
+      it 'must yield the element' do
+        expect { |b| num_arr.my_map(&b) }.to yield_successive_args(2, 3, 4, 5)
+      end
+    end
+    
+  end
 end
