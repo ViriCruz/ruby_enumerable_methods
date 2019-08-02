@@ -172,6 +172,17 @@ describe Enumerable do
         expect { |b| num_arr.my_map(&b) }.to yield_successive_args(2, 3, 4, 5)
       end
     end
-    
+  end
+
+  describe "#my_inject" do
+    context 'when a range from 1 to 10 inclusive' do
+      it 'returns the sum of the numbers' do
+        expect((1..10).my_inject { |sum, n| sum + n }).to eql(55)
+      end
+
+      it 'returns the product of multiplying each element by itself' do
+        expect((1..10).my_inject { |times, n| times * n }).to eql(3628800)
+      end
+    end
   end
 end
