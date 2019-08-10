@@ -1,6 +1,8 @@
 module Enumerable
   def my_each  #1
     n = self.length
+    # if array empty?
+    return [] if n.zero?
 
     for i in 0...n
       element = self[i]
